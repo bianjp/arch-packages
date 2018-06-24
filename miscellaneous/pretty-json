@@ -1,0 +1,35 @@
+#!/usr/bin/env python3
+import sys
+import os
+import json
+from pygments import highlight
+from pygments.formatters import TerminalFormatter
+from pygments.lexers import JsonLexer
+import pygments.styles
+
+def pretty_json(content: str):
+   try:
+       content = json.dumps(json.loads(content), indent = 4)
+   except json.decoder.JSONDecodeError:
+       print('Invalid json')
+   else:
+       print(highlight(content, JsonLexer(), TerminalFormatter()))
+
+if len(sys.argv) > 1:
+  length = len(sys.argv)
+  for i in range(1, length):
+    if length > 2:
+        print("%s:" % sys.argv[i])
+    if not os.path.exists(sys.argv[i]):
+        print("File '%s' not exist!" % sys.argv[i])
+    elif not os.path.isfile(sys.argv[i]):
+        print("'%s' is not a file!" % sys.argv[i])
+    else:
+        try:
+            with open(sys.argv[i]) as f:
+                pretty_json(f.read())
+        except OSError as e:
+            print(e)
+else:
+    pretty_json(sys.stdin.read())
+

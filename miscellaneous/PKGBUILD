@@ -1,0 +1,21 @@
+pkgname=bianjp-miscellaneous
+pkgver=0.1.0
+pkgrel=1
+pkgdesc="System configuration and some useful tools"
+arch=('any')
+url="https://github.com/bianjp/arch-packages"
+license=("MIT")
+depends=("python-pygments")
+source=(
+  "10-tcp-bbr.conf"
+  "40-inotify.conf"
+  "pretty-json"
+)
+md5sums=("SKIP" "SKIP" "SKIP")
+
+package() {
+  install -Dm644 10-tcp-bbr.conf "$pkgdir"/etc/sysctl.d/10-tcp-bbr.conf
+  install -Dm644 40-inotify.conf "$pkgdir"/etc/sysctl.d/40-inotify.conf
+  install -Dm755 pretty-json "$pkgdir"/usr/bin/pretty-json
+  ln -s /usr/bin/vim "$pkgdir"/usr/bin/vi
+}

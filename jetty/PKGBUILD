@@ -1,0 +1,26 @@
+pkgname=bianjp-jetty
+pkgver=9.4.11
+_timestamp=v20180605
+pkgrel=1
+pkgdesc="Jetty is a pure Java-based HTTP server and Java Servlet container"
+arch=('any')
+url="http://www.eclipse.org/jetty/"
+license=('Apache' 'EPL')
+depends=('java-environment')
+_distname=jetty-distribution-$pkgver.$_timestamp
+_dluri="http://repo1.maven.org/maven2/org/eclipse/jetty/jetty-distribution/$pkgver.$_timestamp/$_distname.tar.gz"
+source=(
+  "$_dluri"
+  "$_dluri.asc"
+)
+# gpg --recv-keys 5989BAF76217B843D66BE55B2D0E1FB8FE4B68B4
+# gpg --lsign-key 5989BAF76217B843D66BE55B2D0E1FB8FE4B68B4
+validgpgkeys=("5989BAF76217B843D66BE55B2D0E1FB8FE4B68B4")
+md5sums=('SKIP' 'SKIP')
+
+package() {
+  cd "$srcdir/$_distname"
+
+  install -dm755 "${pkgdir}/opt"
+  cp -r "$srcdir/$_distname" "${pkgdir}/opt/jetty"
+}
