@@ -2,20 +2,17 @@ pkgname=bianjp-jetty
 pkgver=9.4.11
 _timestamp=v20180605
 pkgrel=1
-pkgdesc="Jetty is a pure Java-based HTTP server and Java Servlet container"
+pkgdesc="Jetty server. Used by IntelliJ IDEA to run applications in development"
 arch=('any')
 url="http://www.eclipse.org/jetty/"
 license=('Apache' 'EPL')
 depends=('java-environment')
-_distname=jetty-distribution-$pkgver.$_timestamp
-_dluri="http://repo1.maven.org/maven2/org/eclipse/jetty/jetty-distribution/$pkgver.$_timestamp/$_distname.tar.gz"
+_distname=jetty-home-$pkgver.$_timestamp
+_repo_url=http://maven.aliyun.com/nexus/content/repositories/central
 source=(
-  "$_dluri"
-  "$_dluri.asc"
+  "$_repo_url/org/eclipse/jetty/jetty-home/$pkgver.$_timestamp/$_distname.tar.gz"
+  "create_jetty_base.sh"
 )
-# gpg --recv-keys 5989BAF76217B843D66BE55B2D0E1FB8FE4B68B4
-# gpg --lsign-key 5989BAF76217B843D66BE55B2D0E1FB8FE4B68B4
-validgpgkeys=("5989BAF76217B843D66BE55B2D0E1FB8FE4B68B4")
 md5sums=('SKIP' 'SKIP')
 
 package() {
@@ -23,4 +20,5 @@ package() {
 
   install -dm755 "${pkgdir}/opt"
   cp -r "$srcdir/$_distname" "${pkgdir}/opt/jetty"
+  install -m755 "$srcdir/create_jetty_base.sh" "${pkgdir}/opt/jetty/"
 }
