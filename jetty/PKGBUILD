@@ -1,7 +1,7 @@
 pkgname=bianjp-jetty
 pkgver=9.4.11
 _timestamp=v20180605
-pkgrel=1
+pkgrel=2
 pkgdesc="Jetty server. Used by IntelliJ IDEA to run applications in development"
 arch=('any')
 url="http://www.eclipse.org/jetty/"
