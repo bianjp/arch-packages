@@ -1,0 +1,23 @@
+pkgname=bianjp-tomcat
+pkgver=9.0.10
+pkgrel=1
+pkgdesc="Tomcat server. Used by IntelliJ IDEA to run applications in development"
+arch=('any')
+url="https://tomcat.apache.org/"
+license=('Apache')
+depends=('java-environment')
+_repo_url="https://mirrors.ustc.edu.cn/apache/tomcat/tomcat-9"
+source=(
+  "${_repo_url}/v${pkgver}/bin/apache-tomcat-${pkgver}.tar.gz"
+  "create_tomcat_base.sh"
+)
+md5sums=('SKIP' 'SKIP')
+
+package() {
+  cd "${srcdir}"/apache-tomcat-${pkgver}
+
+  install -dm755 "${pkgdir}"/opt
+  cp -r --no-preserve=mode "${srcdir}"/apache-tomcat-${pkgver} "${pkgdir}"/opt/tomcat
+  chmod 755 "${pkgdir}"/opt/tomcat/bin/*.sh
+  install -m755 "${srcdir}"/create_tomcat_base.sh "${pkgdir}"/opt/tomcat/
+}
