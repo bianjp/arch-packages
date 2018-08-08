@@ -1,0 +1,77 @@
+#!/usr/bin/python
+import argparse
+import os
+import re
+import urllib.parse
+
+IGORED_KEYS = (
+    "application",
+    "anyhost",
+    "dubbo",
+    "default.timeout",
+    "exceptions",
+    "interface",
+    "methods",
+    "pid",
+    "side",
+    "threadpool",
+    "timestamp",
+    "logger",
+    "default.retries",
+    "default.check",
+    "check",
+    "category",
+    "timeout",
+    "probe"
+)
+
+
+def decode(url: str, show_all: bool):
+    url = urllib.parse.unquote(url)
+    url = urllib.parse.urlparse(url)
+
+    # print(url.path.strip("/"))
+    print(url.netloc)
+    for key, value in urllib.parse.parse_qsl(url.query):
+        if not show_all and key in IGORED_KEYS:
+            continue
+        print(key + "=" + value)
+
+
+def parse(urls: str, show_all: bool):
+    urls = re.split('[,\s\[\]]+', urls)
+    for url in urls:
+        if not url or len(url) < 10:
+            continue
+        print()
+        decode(url, show_all)
+
+
+def main():
+    parser = argparse.ArgumentParser(
+        description='Decode dubbo provider/customer URLs. Enter interactive mode if no URL is passed')
+    parser.add_argument('-a', '--all', dest='show_all', default=None, action='store_true',
+                        help='Whether or not to show all arguments. By default common arguments are filtered. Can also be set by environment variable DEDUBBO_SHOWALL')
+    parser.add_argument('urls', nargs='*', help='Provider/consumer URLs')
+
+    args = parser.parse_args()
+    show_all: bool = args.show_all
+    if show_all is None:
+        show_all = os.environ.get('DEDUBBO_SHOWALL', '').lower() in ('true', '1')
+
+    if len(args.urls) > 0:
+        parse(' '.join(args.urls), show_all)
+    else:
+        # interactive mode
+        try:
+            while True:
+                urls: str = input('>>> ')
+                if urls and len(urls) > 10:
+                    parse(urls, show_all)
+            pass
+        except EOFError:
+            print()
+
+
+if __name__ == '__main__':
+    main()
