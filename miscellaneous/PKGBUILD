@@ -1,5 +1,5 @@
 pkgname=bianjp-miscellaneous
-pkgver=0.1.2
+pkgver=0.1.3
 pkgrel=1
 pkgdesc="System configuration and some useful tools"
 arch=('any')
@@ -11,15 +11,13 @@ source=(
   "40-inotify.conf"
   "pretty-json"
   "dedubbo"
-  "setmtu@.service"
 )
-md5sums=("SKIP" "SKIP" "SKIP" "SKIP" "SKIP")
+md5sums=("SKIP" "SKIP" "SKIP" "SKIP")
 
 package() {
   install -Dm644 10-tcp-bbr.conf "$pkgdir"/etc/sysctl.d/10-tcp-bbr.conf
   install -Dm644 40-inotify.conf "$pkgdir"/etc/sysctl.d/40-inotify.conf
   install -Dm755 pretty-json "$pkgdir"/usr/bin/pretty-json
   install -Dm755 dedubbo "$pkgdir"/usr/bin/dedubbo
-  install -Dm644 setmtu@.service "$pkgdir"/usr/lib/systemd/system/setmtu@.service
   ln -s /usr/bin/vim "$pkgdir"/usr/bin/vi
 }

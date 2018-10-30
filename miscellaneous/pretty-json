@@ -9,7 +9,7 @@ import pygments.styles
 
 def pretty_json(content: str):
    try:
-       content = json.dumps(json.loads(content), indent = 4)
+       content = json.dumps(json.loads(content), ensure_ascii = False, indent = 4)
    except json.decoder.JSONDecodeError:
        print('Invalid json')
    else:
