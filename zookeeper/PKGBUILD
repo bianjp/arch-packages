@@ -1,0 +1,38 @@
+pkgname=bianjp-zookeeper-beta
+pkgver=3.5.4
+pkgrel=1
+pkgdesc='Open-source server which enables highly reliable distributed coordination'
+arch=('any')
+url='https://zookeeper.apache.org/'
+license=('Apache')
+depends=('java-runtime-headless>=8')
+
+_mirror_url='https://mirrors.tuna.tsinghua.edu.cn/apache'
+_backup_mirror_url="https://www-us.apache.org/dist"
+source=(
+  "${_mirror_url}/zookeeper/zookeeper-${pkgver}-beta/zookeeper-${pkgver}-beta.tar.gz"
+  "${_backup_mirror_url}/zookeeper/zookeeper-${pkgver}-beta/zookeeper-${pkgver}-beta.tar.gz.md5"
+)
+md5sums=('SKIP' 'SKIP')
+
+package() {
+  md5sum -c "${srcdir}/zookeeper-${pkgver}-beta.tar.gz.md5" > /dev/null
+
+  install -dm755 "${pkgdir}/opt"
+  install -dm755 "${pkgdir}/usr/bin"
+  cp -r "${srcdir}/zookeeper-${pkgver}-beta" "${pkgdir}/opt/zookeeper"
+
+  rm -r "${pkgdir}"/opt/zookeeper/bin/*.cmd
+  rm -r "${pkgdir}"/opt/zookeeper/bin/*.txt
+  rm -r "${pkgdir}"/opt/zookeeper/dist-maven
+  rm -r "${pkgdir}"/opt/zookeeper/docs
+  rm -r "${pkgdir}"/opt/zookeeper/src
+  rm -r "${pkgdir}"/opt/zookeeper/recipes
+
+  local filename
+  local executable
+  for executable in "${pkgdir}"/opt/zookeeper/bin/*.sh; do
+    filename="$(basename "$executable" .sh)"
+    ln -s "/opt/zookeeper/bin/${filename}.sh" "${pkgdir}/usr/bin/${filename}"
+  done
+}
