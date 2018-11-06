@@ -34,5 +34,6 @@ package() {
   for executable in "${pkgdir}"/opt/zookeeper/bin/*.sh; do
     filename="$(basename "$executable" .sh)"
     ln -s "/opt/zookeeper/bin/${filename}.sh" "${pkgdir}/usr/bin/${filename}"
+    sed -i 's#ZOOBINDIR=.*#ZOOBINDIR=/opt/zookeeper/bin#' "${pkgdir}/usr/bin/${filename}"
   done
 }
