@@ -1,12 +1,12 @@
 pkgname=bianjp-tomcat
-pkgver=9.0.12
+pkgver=9.0.13
 pkgrel=1
 pkgdesc="Tomcat server. Used by IntelliJ IDEA to run applications in development"
 arch=('any')
 url="https://tomcat.apache.org/"
 license=('Apache')
 depends=('java-environment')
-_repo_url="https://mirrors.ustc.edu.cn/apache/tomcat/tomcat-9"
+_repo_url="https://mirror.tuna.tsinghua.edu.cn/apache/tomcat/tomcat-9"
 source=(
   "${_repo_url}/v${pkgver}/bin/apache-tomcat-${pkgver}.tar.gz"
   "create_tomcat_base.sh"
