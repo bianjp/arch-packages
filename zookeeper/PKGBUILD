@@ -21,6 +21,8 @@ package() {
   install -dm755 "${pkgdir}/opt"
   install -dm755 "${pkgdir}/usr/bin"
   cp -r "${srcdir}/zookeeper-${pkgver}-beta" "${pkgdir}/opt/zookeeper"
+  mv "${pkgdir}/opt/zookeeper/conf/zoo_sample.cfg" "${pkgdir}/opt/zookeeper/conf/zoo.cfg"
+  echo -e '\nadmin.enableServer=false' >> "${pkgdir}/opt/zookeeper/conf/zoo.cfg"
 
   rm -r "${pkgdir}"/opt/zookeeper/bin/*.cmd
   rm -r "${pkgdir}"/opt/zookeeper/bin/*.txt
