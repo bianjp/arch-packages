@@ -1,0 +1,14 @@
+pkgname=iwhalecloud-vpn-routes
+pkgver=0.1.0
+pkgrel=1
+pkgdesc='Route only iwhalecloud intranet traffic to VPN'
+arch=('any')
+url='https://github.com/bianjp/arch-packages/tree/master/iwhalecloud-vpn-routes'
+license=('MIT')
+depends=('iproute2' 'ppp' 'networkmanager')
+source=('ip-up.sh')
+md5sums=('SKIP')
+
+package() {
+  install -D -m 755 ip-up.sh "$pkgdir/etc/ppp/ip-up.d/01-iwhalecloud-routes.sh"
+}
