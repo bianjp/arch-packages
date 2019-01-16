@@ -12,8 +12,9 @@ _backup_mirror_url="https://www-us.apache.org/dist"
 source=(
   "${_mirror_url}/zookeeper/zookeeper-${pkgver}-beta/zookeeper-${pkgver}-beta.tar.gz"
   "${_backup_mirror_url}/zookeeper/zookeeper-${pkgver}-beta/zookeeper-${pkgver}-beta.tar.gz.md5"
+  "zookeeper.service"
 )
-md5sums=('SKIP' 'SKIP')
+md5sums=('SKIP' 'SKIP' 'SKIP')
 
 package() {
   md5sum -c "${srcdir}/zookeeper-${pkgver}-beta.tar.gz.md5" > /dev/null
@@ -38,4 +39,6 @@ package() {
     ln -s "/opt/zookeeper/bin/${filename}.sh" "${pkgdir}/usr/bin/${filename}"
     sed -i 's#ZOOBINDIR=.*#ZOOBINDIR=/opt/zookeeper/bin#' "${pkgdir}/usr/bin/${filename}"
   done
+
+  install -Dm644 "${srcdir}/zookeeper.service" "${pkgdir}/usr/lib/systemd/system/zookeeper.service"
 }

@@ -1,0 +1,9 @@
+[Unit]
+Description=Zookeeper distributed coordination server
+After=network.target
+
+[Service]
+ExecStart=/usr/bin/zkServer start-foreground
+
+[Install]
+WantedBy=multi-user.target
