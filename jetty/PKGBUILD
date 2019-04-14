@@ -1,6 +1,6 @@
 pkgname=bianjp-jetty
-pkgver=9.4.15
-_timestamp=v20190215
+pkgver=9.4.16
+_timestamp=v20190411
 pkgrel=1
 pkgdesc="Jetty server. Used by IntelliJ IDEA to run applications in development"
 arch=('any')
