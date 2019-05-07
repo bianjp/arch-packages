@@ -24,7 +24,7 @@ package() {
   install -dm755 "${pkgdir}/var/lib/zookeeper"
   cp -r "${srcdir}/zookeeper-${pkgver}-beta" "${pkgdir}/opt/zookeeper"
   mv "${pkgdir}/opt/zookeeper/conf/zoo_sample.cfg" "${pkgdir}/opt/zookeeper/conf/zoo.cfg"
-  echo -e '\nadmin.enableServer=false' >> "${pkgdir}/opt/zookeeper/conf/zoo.cfg"
+  echo -e '\nadmin.enableServer=false\n4lw.commands.whitelist=*' >> "${pkgdir}/opt/zookeeper/conf/zoo.cfg"
   sed -i 's#dataDir=.*#dataDir=/var/lib/zookeeper#' "${pkgdir}/opt/zookeeper/conf/zoo.cfg"
 
   rm -r "${pkgdir}"/opt/zookeeper/bin/*.cmd
