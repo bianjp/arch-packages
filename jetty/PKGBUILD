@@ -3,6 +3,7 @@ pkgver=9.4.18
 _timestamp=v20190429
 pkgrel=1
 pkgdesc="Jetty server. Used by IntelliJ IDEA to run applications in development"
+groups=("bianjp")
 arch=('any')
 url="http://www.eclipse.org/jetty/"
 license=('Apache' 'EPL')

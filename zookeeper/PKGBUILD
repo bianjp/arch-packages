@@ -2,6 +2,7 @@ pkgname=bianjp-zookeeper-beta
 pkgver=3.5.4
 pkgrel=1
 pkgdesc='Open-source server which enables highly reliable distributed coordination'
+groups=("bianjp")
 arch=('any')
 url='https://zookeeper.apache.org/'
 license=('Apache')

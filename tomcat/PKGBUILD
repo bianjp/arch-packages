@@ -2,6 +2,7 @@ pkgname=bianjp-tomcat
 pkgver=9.0.19
 pkgrel=1
 pkgdesc="Tomcat server. Used by IntelliJ IDEA to run applications in development"
+groups=("bianjp")
 arch=('any')
 url="https://tomcat.apache.org/"
 license=('Apache')

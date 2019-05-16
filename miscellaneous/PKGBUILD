@@ -2,6 +2,7 @@ pkgname=bianjp-miscellaneous
 pkgver=0.1.4
 pkgrel=1
 pkgdesc="System configuration and some useful tools"
+groups=("bianjp")
 arch=('any')
 url="https://github.com/bianjp/arch-packages"
 license=("MIT")
