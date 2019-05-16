@@ -1,0 +1,20 @@
+pkgname=bianjp-dnsmasq
+pkgver=0.1.0
+pkgrel=1
+pkgdesc="System configuration and some useful tools"
+arch=('any')
+url="https://github.com/bianjp/arch-packages"
+license=("MIT")
+depends=("networkmanager" "dnsmasq")
+source=(
+  "dnsmasq.conf"
+  "redirect.conf"
+)
+md5sums=()
+for i in "${source[@]}"; do md5sums+=("SKIP"); done
+
+
+package() {
+  install -Dm644 dnsmasq.conf "$pkgdir"/etc/NetworkManager/conf.d/dnsmasq.conf
+  install -Dm644 redirect.conf "$pkgdir"/etc/NetworkManager/dnsmasq.d/redirect.conf
+}
