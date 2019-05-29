@@ -1,0 +1,28 @@
+# Based on svn://svn.archlinux.org/community/gitlab-runner/repos/community-x86_64
+
+pkgname=gitlab-runner
+pkgver=11.11.0
+pkgrel=1
+pkgdesc="The official GitLab CI runner written in Go"
+arch=('armv7h')
+url='https://gitlab.com/gitlab-org/gitlab-runner'
+license=('GPL3')
+depends=('ca-certificates' 'curl' 'git' 'glibc' 'tar')
+install='gitlab-runner.install'
+replaces=('gitlab-ci-multi-runner')
+backup=('etc/gitlab-runner/config.toml')
+
+source=("https://gitlab-runner-downloads.s3.amazonaws.com/v${pkgver}/binaries/gitlab-runner-linux-arm"
+        "gitlab-runner.service"
+        "gitlab-runner.sysusers"
+        "gitlab-runner.tmpfiles"
+        "config.toml")
+sha512sums=('SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP')
+
+package() {
+    install -Dm644 "${srcdir}/config.toml" "${pkgdir}/etc/gitlab-runner/config.toml"
+    install -Dm644 "${srcdir}/gitlab-runner.service" "${pkgdir}/usr/lib/systemd/system/gitlab-runner.service"
+    install -Dm644 "${srcdir}/gitlab-runner.sysusers" "${pkgdir}/usr/lib/sysusers.d/gitlab-runner.conf"
+    install -Dm644 "${srcdir}/gitlab-runner.tmpfiles" "${pkgdir}/usr/lib/tmpfiles.d/gitlab-runner.conf"
+    install -Dm755 gitlab-runner-linux-arm "${pkgdir}/usr/bin/gitlab-runner"
+}
