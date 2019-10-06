@@ -24,5 +24,6 @@ package() {
   install -Dm644 mtu.conf "$pkgdir"/etc/NetworkManager/conf.d/mtu.conf
   install -Dm755 pretty-json "$pkgdir"/usr/bin/pretty-json
   install -Dm755 dedubbo "$pkgdir"/usr/bin/dedubbo
-  ln -s /usr/bin/vim "$pkgdir"/usr/bin/vi
+  mkdir -p "$pkgdir"/usr/local/bin/
+  ln -s /usr/bin/vim "$pkgdir"/usr/local/bin/vi
 }
