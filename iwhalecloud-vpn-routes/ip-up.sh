@@ -4,7 +4,7 @@ sleep 3
 
 gateway=$(ip route list | grep ' dev ppp' | cut -d' ' -f1)
 
-if [[ ! "$gateway" = 10.* ]]; then
+if [[ "$gateway" != 10.* && "$gateway" != 172.* ]]; then
   exit
 fi
 
