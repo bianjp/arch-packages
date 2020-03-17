@@ -1,5 +1,5 @@
 pkgname=bianjp-zookeeper
-pkgver=3.5.5
+pkgver=3.5.7
 pkgrel=1
 pkgdesc='Open-source server which enables highly reliable distributed coordination'
 groups=("bianjp")
