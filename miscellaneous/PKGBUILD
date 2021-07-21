@@ -1,5 +1,5 @@
 pkgname=bianjp-miscellaneous
-pkgver=0.1.4
+pkgver=0.1.5
 pkgrel=1
 pkgdesc="System configuration and some useful tools"
 groups=("bianjp")
@@ -9,6 +9,7 @@ license=("MIT")
 depends=("python-pygments")
 source=(
   "10-tcp-bbr.conf"
+  "11-tcp-fast-open.conf"
   "40-inotify.conf"
   "mtu.conf"
   "pretty-json"
@@ -20,6 +21,7 @@ for i in "${source[@]}"; do md5sums+=("SKIP"); done
 
 package() {
   install -Dm644 10-tcp-bbr.conf "$pkgdir"/etc/sysctl.d/10-tcp-bbr.conf
+  install -Dm644 11-tcp-fast-open.conf "$pkgdir"/etc/sysctl.d/11-tcp-fast-open.conf
   install -Dm644 40-inotify.conf "$pkgdir"/etc/sysctl.d/40-inotify.conf
   install -Dm644 mtu.conf "$pkgdir"/etc/NetworkManager/conf.d/mtu.conf
   install -Dm755 pretty-json "$pkgdir"/usr/bin/pretty-json
