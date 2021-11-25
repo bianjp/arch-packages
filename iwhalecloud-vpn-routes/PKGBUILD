@@ -1,4 +1,4 @@
-pkgname=iwhalecloud-vpn-routes
+pkgname=bianjp-iwhalecloud-vpn-routes
 pkgver=0.1.0
 pkgrel=1
 pkgdesc='Route only iwhalecloud intranet traffic to VPN'
