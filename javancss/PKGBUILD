@@ -1,0 +1,29 @@
+pkgname=bianjp-javancss
+pkgver=0.1
+pkgrel=1
+pkgdesc="A Source Measurement Suite for Java"
+groups=("bianjp")
+arch=('any')
+url="https://github.com/bianjp/arch-packages"
+license=("MIT")
+depends=("java-environment")
+source=(
+  "javancss.git::git+http://gitlab.iwhalecloud.com/bianjp/javancss.git"
+  "javancss.sh"
+)
+md5sums=('SKIP' 'SKIP')
+
+build() {
+  cd javancss.git
+  mvn clean package
+  cd target
+  tar xf javancss-34.55-SNAPSHOT.tar.gz
+}
+
+package() {
+  install -dm755 "${pkgdir}"/opt
+  install -dm755 "${pkgdir}"/usr/bin
+  cp -r "${srcdir}"/javancss.git/target/javancss-34.55-SNAPSHOT "${pkgdir}"/opt/javancss
+  rm -rf "${pkgdir}"/opt/javancss/bin
+  install -Dm755 javancss.sh "$pkgdir"/usr/bin/javancss
+}
