@@ -4,7 +4,7 @@
 sleep 3
 
 # 找出 VPN 客户端 IP
-gateway=$(ip route list | grep ' dev ppp' | cut -d' ' -f1)
+gateway=$(ip route list | grep ' dev ppp' | head -n1 | cut -d' ' -f1)
 # 不是浩鲸科技 VPN 时不处理
 if [[ "$gateway" != 10.* && "$gateway" != 172.* ]]; then
   exit
