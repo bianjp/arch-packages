@@ -1,5 +1,5 @@
 pkgname=bianjp-zookeeper
-pkgver=3.6.3
+pkgver=3.6.4
 pkgrel=1
 pkgdesc='Open-source server which enables highly reliable distributed coordination'
 groups=("bianjp")
@@ -8,18 +8,13 @@ url='https://zookeeper.apache.org/'
 license=('Apache')
 depends=('java-runtime-headless>=8')
 
-_mirror_url='https://mirrors.tuna.tsinghua.edu.cn/apache'
-_backup_mirror_url="https://www-us.apache.org/dist"
 source=(
-  "${_mirror_url}/zookeeper/zookeeper-${pkgver}/apache-zookeeper-${pkgver}-bin.tar.gz"
-  "${_backup_mirror_url}/zookeeper/zookeeper-${pkgver}/apache-zookeeper-${pkgver}-bin.tar.gz.sha512"
+  "https://mirrors.ustc.edu.cn/apache/zookeeper/zookeeper-${pkgver}/apache-zookeeper-${pkgver}-bin.tar.gz"
   "zookeeper.service"
 )
-md5sums=('SKIP' 'SKIP' 'SKIP')
+md5sums=('SKIP' 'SKIP')
 
 package() {
-  sha512sum -c "${srcdir}/apache-zookeeper-${pkgver}-bin.tar.gz.sha512" > /dev/null
-
   install -dm755 "${pkgdir}/opt"
   install -dm755 "${pkgdir}/usr/bin"
   install -dm755 "${pkgdir}/var/lib/zookeeper"
