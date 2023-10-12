@@ -1,0 +1,21 @@
+pkgname=bianjp-edk2-aarch64
+pkgver=0.1
+pkgrel=1
+pkgdesc='适用于 CentOS/OpenEuler 的 UEFI 固件包。官方包 edk2-aarch64 中的固件不能正常启动 CentOS/OpenEuler'
+groups=('bianjp')
+arch=('any')
+license=('unknown')
+depends=('edk2-ovmf')
+source=(
+  'https://mirrors.ustc.edu.cn/centos-altarch/7/os/aarch64/Packages/AAVMF-20180508-6.gitee3198e672e2.el7.noarch.rpm'
+  '60-edk2-aarch64-centos.json'
+)
+md5sums=('SKIP' 'SKIP')
+
+package() {
+  install -dm755 "${pkgdir}/usr/share/edk2/aarch64"
+  install -dm755 "${pkgdir}/usr/share/qemu/firmware"
+  install -m644 "usr/share/AAVMF/AAVMF_CODE.fd" "${pkgdir}/usr/share/edk2/aarch64/"
+  install -m644 "usr/share/AAVMF/AAVMF_VARS.fd" "${pkgdir}/usr/share/edk2/aarch64/"
+  install -m644 "60-edk2-aarch64-centos.json" "${pkgdir}/usr/share/qemu/firmware/"
+}
