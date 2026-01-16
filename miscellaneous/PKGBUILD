@@ -1,5 +1,5 @@
 pkgname=bianjp-miscellaneous
-pkgver=0.1.5
+pkgver=0.1.6
 pkgrel=1
 pkgdesc="System configuration and some useful tools"
 groups=("bianjp")
@@ -14,6 +14,7 @@ source=(
   "40-inotify.conf"
   "pretty-json"
   "dedubbo"
+  "90-remove-duplicate-chrome-desktop.hook"
 )
 md5sums=()
 for i in "${source[@]}"; do md5sums+=("SKIP"); done
@@ -26,6 +27,7 @@ package() {
   install -Dm644 40-inotify.conf "$pkgdir"/etc/sysctl.d/40-inotify.conf
   install -Dm755 pretty-json "$pkgdir"/usr/bin/pretty-json
   install -Dm755 dedubbo "$pkgdir"/usr/bin/dedubbo
+  install -Dm644 90-remove-duplicate-chrome-desktop.hook "$pkgdir"/usr/share/libalpm/hooks/90-remove-duplicate-chrome-desktop.hook
   mkdir -p "$pkgdir"/usr/local/bin/
   ln -s /usr/bin/vim "$pkgdir"/usr/local/bin/vi
 }

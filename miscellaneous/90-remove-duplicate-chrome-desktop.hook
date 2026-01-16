@@ -1,0 +1,10 @@
+[Trigger]
+Operation = Install
+Operation = Upgrade
+Type = Package
+Target = google-chrome
+
+[Action]
+Description = Removing duplicate Google Chrome desktop entry...
+When = PostTransaction
+Exec = /usr/bin/rm -f /usr/share/applications/com.google.Chrome.desktop
